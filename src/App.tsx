@@ -1,13 +1,17 @@
-import SlideTabs from "./component/Nav";
-import AuthBtn from "./utils/GoogleAuthBtn";
+import { Outlet } from "react-router-dom";
+import Navbar from "./component/Nav";
 
 const App = () => {
-    return (
-        <div>
-          <SlideTabs/>
-          <AuthBtn/>
-        </div>
-    );
+  return (
+    <div>
+      <div className="z-50">
+        <Navbar />
+      </div>
+      <div className="">
+        <Outlet />
+      </div>
+    </div>
+  );
 };
 
 export default App;

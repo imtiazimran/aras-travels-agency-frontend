@@ -1,8 +1,22 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
-/* eslint-disable react-refresh/only-export-components */
+ 
 
 import { useRef, useState } from "react";
 import { motion } from "framer-motion";
+import AuthBtn from "../utils/GoogleAuthBtn";
+import logo from "../assets/img/avlogo.png";
+
+const Navbar = () => {
+  return (
+    <nav className="flex w-full px-4 hover:shadow-lg transition-all duration-700 bg-transparent py-3 fixed top-0 items-center justify-center z-50 ">
+      <div>
+        <img className="w-24" src={logo} alt="" />
+      </div>
+      <SlideTabs />
+      <AuthBtn />
+    </nav>
+  );
+};
 
 const SlideTabs = () => {
   const [position, setPosition] = useState({
@@ -13,7 +27,7 @@ const SlideTabs = () => {
   return (
     <ul
       onMouseLeave={() => setPosition((pv) => ({ ...pv, opacity: 0 }))}
-      className="my-4 relative mx-auto flex w-fit rounded-full border-2 border-black bg-white p-1"
+      className=" relative mx-auto flex w-fit rounded-full border-2 border-black bg-white p-1"
     >
       <Tab setPosition={setPosition}>Home</Tab>
       <Tab setPosition={setPosition}>About</Tab>
@@ -59,4 +73,4 @@ const Tab = ({
   );
 };
 
-export default SlideTabs;
+export default Navbar;
