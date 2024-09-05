@@ -1,7 +1,11 @@
+import SlideTabs from "./component/Nav";
+import AuthBtn from "./utils/GoogleAuthBtn";
+
 const App = () => {
     return (
         <div>
-          <h1> This is from App </h1> 
+          <SlideTabs/>
+          <AuthBtn/>
         </div>
     );
 };
