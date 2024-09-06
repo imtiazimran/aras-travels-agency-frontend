@@ -22,7 +22,7 @@ const AuthBtn = () => {
       onError={() => {
         console.log("Login Failed");
       }}
-      useOneTap
+      
     />
   );
 };
