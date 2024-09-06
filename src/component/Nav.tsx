@@ -205,7 +205,7 @@ const MobileNav = () => {
                   duration: 0.2,
                   ease: "easeInOut"
                 }
-              }}>Contact</motion.li>
+              }}><AuthBtn/></motion.li>
             </motion.ul>
           </motion.div>
         )}
