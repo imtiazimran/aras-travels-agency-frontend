@@ -3,11 +3,12 @@ import { Canvas } from "@react-three/fiber";
 import { useEffect } from "react";
 import { FiArrowRight } from "react-icons/fi";
 import {
-  useMotionTemplate, 
+  useMotionTemplate,
   useMotionValue,
   motion,
-  animate
+  animate,
 } from "framer-motion";
+import Reveal from "../../utils/Reveal";
 
 const COLORS_TOP = ["#13FFAA", "#1E67C6", "#CE84CF", "#DD335C"];
 
@@ -37,11 +38,15 @@ export const Hero = () => {
         <span className="mb-1.5 inline-block rounded-full bg-gray-600/50 px-3 py-1.5 text-sm">
           Beta Now Live!
         </span>
-        <h1 className="max-w-3xl bg-gradient-to-br from-white to-gray-400 bg-clip-text text-center text-3xl font-medium leading-tight text-transparent sm:text-5xl sm:leading-tight md:text-7xl md:leading-tight">
-        Your Gateway to Global Opportunities
-        </h1>
+        <Reveal >
+          <h1 className="max-w-3xl bg-gradient-to-br from-white to-gray-400 bg-clip-text text-center text-3xl font-medium leading-tight text-transparent sm:text-5xl sm:leading-tight md:text-7xl md:leading-tight">
+            Your Gateway to Global Opportunities
+          </h1>
+        </Reveal>
         <p className="my-6 max-w-xl text-center text-base leading-relaxed md:text-lg md:leading-relaxed">
-        Start your journey with trusted visa services. We specialize in working visas and will soon offer air ticket bookings and more, making your travel seamless.
+          Start your journey with trusted visa services. We specialize in
+          working visas and will soon offer air ticket bookings and more, making
+          your travel seamless.
         </p>
         <motion.button
           style={{

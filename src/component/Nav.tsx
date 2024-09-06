@@ -11,6 +11,7 @@ import {
 import AuthBtn from "../utils/GoogleAuthBtn";
 import logo from "../assets/img/avlogo.png";
 import useScrolledValue from "../utils/useScroll";
+import Reveal from "../utils/Reveal";
 
 const Navbar = () => {
   const [scrollY] = useScrolledValue();
@@ -178,34 +179,54 @@ const MobileNav = () => {
               exit="exit"
               className="text-5xl text-center flex flex-col gap-4 skew-x-1 uppercase"
             >
-              <motion.li variants={childVariant} whileTap={{
-                scale: 1.2,
-                transition: {
-                  duration: 0.2,
-                  ease: "easeInOut"
-                }
-              }}>Home</motion.li>
-              <motion.li variants={childVariant} whileTap={{
-                scale: 1.2,
-                transition: {
-                  duration: 0.2,
-                  ease: "easeInOut"
-                }
-              }}>About</motion.li>
-              <motion.li variants={childVariant} whileTap={{
-                scale: 1.2,
-                transition: {
-                  duration: 0.2,
-                  ease: "easeInOut"
-                }
-              }}>Projects</motion.li>
-              <motion.li variants={childVariant} whileTap={{
-                scale: 1.2,
-                transition: {
-                  duration: 0.2,
-                  ease: "easeInOut"
-                }
-              }}><AuthBtn/></motion.li>
+              <motion.li
+                variants={childVariant}
+                whileTap={{
+                  scale: 1.2,
+                  transition: {
+                    duration: 0.2,
+                    ease: "easeInOut",
+                  },
+                }}
+              >
+                <Reveal>Home</Reveal>
+              </motion.li>
+              <motion.li
+                variants={childVariant}
+                whileTap={{
+                  scale: 1.2,
+                  transition: {
+                    duration: 0.2,
+                    ease: "easeInOut",
+                  },
+                }}
+              >
+                <Reveal>About</Reveal>
+              </motion.li>
+              <motion.li
+                variants={childVariant}
+                whileTap={{
+                  scale: 1.2,
+                  transition: {
+                    duration: 0.2,
+                    ease: "easeInOut",
+                  },
+                }}
+              >
+                <Reveal>Projects</Reveal>
+              </motion.li>
+              <motion.li
+                variants={childVariant}
+                whileTap={{
+                  scale: 1.2,
+                  transition: {
+                    duration: 0.2,
+                    ease: "easeInOut",
+                  },
+                }}
+              >
+                <AuthBtn />
+              </motion.li>
             </motion.ul>
           </motion.div>
         )}

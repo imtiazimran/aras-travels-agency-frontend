@@ -1,12 +1,12 @@
 import { Hero } from "../pages/Home/Hero";
+import WhoWeAre from "../pages/Home/WhoWeAre";
 
 
 const Home = () => {
     return (
         <div>
             <Hero/>
-            <section className=" h-screen bg-red-700"></section>
-            <section className=" h-screen bg-indigo-700"></section>
+            <WhoWeAre/>
         </div>
     );
 };
