@@ -1,6 +1,6 @@
 const Container = ({children, className}: {children: React.ReactNode, className?: string}) => {
     return (
-        <div className={` w-[1200px] mx-auto ${className}`}>
+        <div className={` max-w-[1200px] mx-auto px-5 ${className}`}>
           {children}
         </div>
     );
