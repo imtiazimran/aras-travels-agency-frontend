@@ -36,7 +36,7 @@ const Navbar = () => {
         boxShadow: boxShadow as unknown as string,
       }}
       className={`${
-        scrollY > 800 ? " bg-white bg-opacity-25" : "bg-transparent"
+        scrollY > 800 ? " bg-white bg-opacity-75" : "bg-transparent"
       } flex w-full px-4 hover:shadow-lg transition-all duration-700  py-3 fixed top-0 items-center justify-between z-50 `}
     >
       <div className="z-50">
