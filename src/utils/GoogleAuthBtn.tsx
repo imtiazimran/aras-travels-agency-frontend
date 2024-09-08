@@ -3,17 +3,17 @@ import { GoogleLogin } from "@react-oauth/google";
 import { setCookie } from "./setToCookies";
 import { useAppDispatch } from "../redux/hooks";
 import { setUser } from "../redux/features/auth/authSlice";
-import { useGetUsersQuery } from "../redux/features/auth/authApi";
-
+import { useGetMeQuery } from "../redux/features/auth/authApi";
 const AuthBtn = () => {
     const dispatch = useAppDispatch()
-    const {data} = useGetUsersQuery(undefined)
-   
+    const {data, refetch} = useGetMeQuery(undefined)
+
   return (
     <GoogleLogin
       onSuccess={(credentialResponse) => {
         const token = credentialResponse.credential;
-        dispatch(setUser({ token }));
+        refetch()
+        dispatch(setUser({ token, user: data?.data }));
         console.log(token, data);
         localStorage.setItem("tokenForAv", token as string);
         setCookie("token", token as string, 30);
