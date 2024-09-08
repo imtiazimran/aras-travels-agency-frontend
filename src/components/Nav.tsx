@@ -12,8 +12,18 @@ import AuthBtn from "../utils/GoogleAuthBtn";
 import logo from "../assets/img/avlogo.png";
 import useScrolledValue from "../utils/useScroll";
 import Reveal from "../utils/Reveal";
+import { logout, selectUser } from "../redux/features/auth/authSlice";
+import { useAppDispatch, useAppSelector } from "../redux/hooks";
+import { Link } from "react-router-dom";
+import { useOutsideClick } from "../hooks/useOutsideClick";
+import { persister } from "../redux/store";
 
 const Navbar = () => {
+  const user = useAppSelector(selectUser);
+  const dispatch = useAppDispatch();
+  const [open, setOpen] = useState(false);
+  const menuRef = useRef(null);
+  useOutsideClick(menuRef, () => setOpen(false));
   const [scrollY] = useScrolledValue();
   const motionYValue = motionValue(scrollY);
   const background = useTransform(
@@ -27,6 +37,12 @@ const Navbar = () => {
     [0, 300],
     ["0px 0px 0px rgba(0,0,0,0)", "0px 4px 12px rgba(0,0,0,0.3)"]
   );
+
+  const handleLogout = () => {
+    dispatch(logout());
+    persister.purge();
+    window.location.reload();
+  };
 
   return (
     <nav
@@ -44,16 +60,89 @@ const Navbar = () => {
       </div>
       <SlideTabs />
       <div className="hidden md:flex">
-        <AuthBtn />
+        {user ? (
+          <div className="text-sm flex justify-center items-center gap-4">
+            <button
+              onClick={handleLogout}
+              className="relative inline-flex  overflow-hidden rounded-full p-0.5  focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50"
+            >
+              <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
+              <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 px-3 py-1 text-sm font-medium text-white backdrop-blur-3xl">
+                Logout
+              </span>
+            </button>
+            <img
+              className="size-10 rounded-full"
+              src={user?.picture}
+              alt={user?.name}
+            />
+          </div>
+        ) : (
+          <AuthBtn />
+        )}
       </div>
-      <div className="md:hidden ">
+      <div className="md:hidden flex  gap-4">
         <MobileNav />
+        <div className="text-sm relative ">
+          <img
+            onClick={() => setOpen(!open)}
+            className="rounded-full size-10"
+            src={user?.picture}
+            alt={user?.name}
+          />
+
+          <AnimatePresence>
+            {open && (
+              <motion.div
+                ref={menuRef}
+                initial={{
+                  opacity: 0,
+                  x: 100,
+                }}
+                animate={{
+                  opacity: 1,
+                  x: 0,
+                  transition: { duration: 0.5, ease: "easeInOut" },
+                }}
+                exit={{
+                  opacity: 0,
+                  x: 100,
+                  transition: { duration: 0.5, ease: "easeInOut" },
+                }}
+                className=" bg-white/50 rounded flex flex-col gap-5 absolute top-11 p-5 right-0"
+              >
+                <Link
+                  className="text-xl hover:bg-white/25 p-2 transition-all rounded font-semibold"
+                  to={"/profile"}
+                >
+                  Profile
+                </Link>
+                <Link
+                  className="text-xl hover:bg-white/25 p-2 rounded transition-all font-semibold"
+                  to={"/dashboard"}
+                >
+                  Dashboard
+                </Link>
+                <button
+                  onClick={handleLogout}
+                  className="relative inline-flex  overflow-hidden rounded-full p-0.5  focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50"
+                >
+                  <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
+                  <span className="inline-flex h-full w-full cursor-pointer items-center justify-center rounded-full bg-slate-950 px-3 py-1 text-sm font-medium text-white backdrop-blur-3xl">
+                    Logout
+                  </span>
+                </button>
+              </motion.div>
+            )}
+          </AnimatePresence>
+        </div>
       </div>
     </nav>
   );
 };
 
 const MobileNav = () => {
+  const user = useAppSelector(selectUser);
   const [active, setActive] = useState(false);
   const VARIANTS = {
     top: {
@@ -225,7 +314,7 @@ const MobileNav = () => {
                   },
                 }}
               >
-                <AuthBtn />
+                {user ? null : <AuthBtn />}
               </motion.li>
             </motion.ul>
           </motion.div>

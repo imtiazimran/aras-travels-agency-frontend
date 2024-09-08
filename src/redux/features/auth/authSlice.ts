@@ -1,12 +1,12 @@
-// authSlice.ts
 import { createSlice } from "@reduxjs/toolkit";
 import { RootState } from "../../store";
+import { PURGE } from "redux-persist";
 
 export type TUser = {
     _id: string;
     name: string;
     email: string;
-    photo: string;
+    picture: string;
 }
 
 export interface AuthState {
@@ -24,14 +24,20 @@ const authSlice = createSlice({
     initialState,
     reducers: {
         setUser: (state, action) => {
-            state.user = action.payload.user;
-            state.token = action.payload.token;
+            state.token = action.payload?.token;
+            state.user = action.payload?.user;
         },
         logout: (state) => {
             state.user = null;
             state.token = null;
         },
     },
+    extraReducers: (builder) => {
+        builder.addCase(PURGE, (state) => {
+            state.user = null;
+            state.token = null;
+        });
+    }
 });
 
 export const { setUser, logout } = authSlice.actions;

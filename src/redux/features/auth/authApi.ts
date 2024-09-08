@@ -9,8 +9,8 @@ const authorization = baseApi.injectEndpoints({
             })
         }),
         getMe: build.query({
-            query: () => ({
-                url: `/user/me`,
+            query: (token) => ({
+                url: `/user/me?token=${token}`,
             }),
         })
     }),
