@@ -84,13 +84,13 @@ const Navbar = () => {
       <div className="md:hidden flex  gap-4">
         <MobileNav />
         <div className="text-sm relative ">
-          <img
+        {user && (  <img
             onClick={() => setOpen(!open)}
             className="rounded-full size-10"
             src={user?.picture}
             alt={user?.name}
           />
-
+)}
           <AnimatePresence>
             {open && (
               <motion.div
