@@ -15,9 +15,8 @@ const AuthBtn = () => {
       onSuccess={(credentialResponse) => {
         const token = credentialResponse.credential;
         dispatch(setUser({ token }));
-        localStorage.setItem("tokenForAv", token as string);
         setCookie("token", token as string, 30);
-        // window.location.reload();
+        window.location.reload();
       }}
       onError={() => {
         console.log("Login Failed");

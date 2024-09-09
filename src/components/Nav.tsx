@@ -335,10 +335,10 @@ const SlideTabs = () => {
       onMouseLeave={() => setPosition((pv) => ({ ...pv, opacity: 0 }))}
       className=" relative mx-auto hidden md:flex w-fit rounded-full border-2 border-black bg-white p-1"
     >
-      <Tab setPosition={setPosition}>Home</Tab>
-      <Tab setPosition={setPosition}>About</Tab>
-      <Tab setPosition={setPosition}>Projects</Tab>
-      <Tab setPosition={setPosition}>Contact</Tab>
+      <Tab setPosition={setPosition} to="/">Home</Tab>
+      <Tab setPosition={setPosition} to="/dashboard">Dashboard</Tab>
+      <Tab setPosition={setPosition} to="/projects" >Projects</Tab>
+      <Tab setPosition={setPosition} to="/contact">Contact</Tab>
 
       <motion.li
         animate={{
@@ -355,9 +355,11 @@ const SlideTabs = () => {
 const Tab = ({
   children,
   setPosition: setPosition,
+  to,
 }: {
   children: React.ReactNode | string;
   setPosition: any;
+  to: string;
 }) => {
   const ref = useRef<HTMLLIElement>(null!);
   return (
@@ -374,7 +376,7 @@ const Tab = ({
       }}
       className="relative z-10 block cursor-pointer px-3 py-1.5 text-xs uppercase text-white mix-blend-difference md:px-5 md:text-base"
     >
-      {children}
+      <Link to={to}>{children}</Link>
     </li>
   );
 };
