@@ -12,8 +12,15 @@ const authorization = baseApi.injectEndpoints({
             query: (token) => ({
                 url: `/user/me?token=${token}`,
             }),
+        }),
+        updateUser: build.mutation({
+            query: (data) => ({
+                url: `/user/update`,
+                method: 'PUT',
+                body: data
+            })
         })
     }),
 })
 
-export const { useGetUsersQuery, useGetMeQuery } = authorization
+export const { useGetUsersQuery, useGetMeQuery, useUpdateUserMutation } = authorization

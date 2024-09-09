@@ -41,7 +41,6 @@ const Navbar = () => {
   const handleLogout = () => {
     dispatch(logout());
     persister.purge();
-    window.location.reload();
   };
 
 
@@ -58,7 +57,9 @@ const Navbar = () => {
       } flex w-full px-4 hover:shadow-lg transition-all duration-700  py-3 fixed top-0 items-center justify-between z-50 `}
     >
       <div className="z-50">
+        <Link to="/">
         <img className="w-24" src={logo} alt="" />
+        </Link>
       </div>
       <SlideTabs />
       <div className="hidden md:flex">
