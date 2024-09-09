@@ -14,7 +14,7 @@ import useScrolledValue from "../utils/useScroll";
 import Reveal from "../utils/Reveal";
 import { logout, selectUser } from "../redux/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { useOutsideClick } from "../hooks/useOutsideClick";
 import { persister } from "../redux/store";
 
@@ -44,7 +44,7 @@ const Navbar = () => {
     window.location.reload();
   };
 
-  console.log(open);
+
 
   return (
     <nav
@@ -87,7 +87,7 @@ const Navbar = () => {
         <MobileNav />
         <div className="text-sm relative ">
         {user && (  <img
-            onClick={() => setOpen(!open)}
+            onClick={() => setOpen((prev) => !prev)}
             className="rounded-full size-10"
             src={user?.picture}
             alt={user?.name}
@@ -378,7 +378,7 @@ const Tab = ({
       }}
       className="relative z-10 block cursor-pointer px-3 py-1.5 text-xs uppercase text-white mix-blend-difference md:px-5 md:text-base"
     >
-      <Link to={to}>{children}</Link>
+      <NavLink className={({ isActive }) => (isActive ? "font-semibold text-blue-400 hover:text-white" : "")} to={to}>{children}</NavLink>
     </li>
   );
 };
