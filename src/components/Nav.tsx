@@ -44,6 +44,8 @@ const Navbar = () => {
     window.location.reload();
   };
 
+  console.log(open);
+
   return (
     <nav
       style={{

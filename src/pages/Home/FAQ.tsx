@@ -1,7 +1,6 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { AnimatePresence, motion } from "framer-motion";
 import { useOutsideClick } from "../../hooks/useOutsideClick";
-import { HeroHighlight } from "../../components/ui/hero-highlight";
 
 export function FAQ() {
   const [active, setActive] = useState<{
@@ -92,32 +91,29 @@ export function FAQ() {
             <motion.div
               layoutId={`faq-${active.question}-${id}`}
               ref={ref}
-              className="w-full max-w-[500px] h-full md:h-fit md:max-h-[90%] flex flex-col bg-neutral-900  overflow-hidden"
+              className="w-full max-w-[500px]  md:h-fit md:max-h-[90%] flex flex-col bg-neutral-900  overflow-hidden"
             >
-                <motion.h2
-                 layoutId={`question-${active.question}-${id}`}
-                  className="relative inline-flex  overflow-hidden  p-1 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50"
-                >
-                  <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
-                  <span className=" h-full w-full cursor-pointer items-center justify-center rounded-sm bg-slate-950 px-3 py-3 text-sm font-medium text-white backdrop-blur-3xl">
-                    <motion.h3
-                      className="font-bold text-neutral-200"
-                    >
-                      {active.question}
-                    </motion.h3>
-                    <motion.p
-                      className="text-neutral-200 mt-2"
-                    >
-                      {active.answer}
-                    </motion.p>
-                  </span>
-                </motion.h2>
+              <motion.h2
+                layoutId={`question-${active.question}-${id}`}
+                className="relative inline-flex  overflow-hidden  p-1 focus:outline-none focus:ring-2 focus:ring-slate-400 focus:ring-offset-2 focus:ring-offset-slate-50"
+              >
+                <span className="absolute inset-[-1000%] animate-[spin_2s_linear_infinite] bg-[conic-gradient(from_90deg_at_50%_50%,#E2CBFF_0%,#393BB2_50%,#E2CBFF_100%)]" />
+                <span className=" h-full w-full cursor-pointer items-center justify-center rounded-sm bg-slate-950 px-3 py-3 text-sm font-medium text-white backdrop-blur-3xl">
+                  <motion.h3 className="font-bold text-neutral-200">
+                    {active.question}
+                  </motion.h3>
+                  <motion.p className="text-neutral-200 mt-2">
+                    {active.answer}
+                  </motion.p>
+                </span>
+              </motion.h2>
             </motion.div>
           </div>
         )}
       </AnimatePresence>
-      <HeroHighlight className="w-full  ">
-        <div className="max-w-2xl  mx-auto w-full  flex justify-center items-center flex-col">
+      <div className="h-[50rem] w-full bg-black/90  bg-grid-small-white/[0.2]  relative flex items-center justify-center">
+        <div className="absolute pointer-events-none inset-0 flex items-center justify-center bg-black [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)]"></div>
+        <div className="max-w-2xl  mx-auto w-full flex justify-center items-center flex-col">
           {faqs.map((faq, index) => (
             <motion.div
               layoutId={`faq-${faq.question}-${id}`}
@@ -139,7 +135,7 @@ export function FAQ() {
             </motion.div>
           ))}
         </div>
-      </HeroHighlight>
+      </div>
     </>
   );
 }
