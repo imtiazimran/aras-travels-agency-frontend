@@ -22,7 +22,7 @@ const Project = () => {
               scale: 1.05,
             },
           }}
-          className="relative h-96 w-80 shrink-0 overflow-hidden rounded-xl bg-indigo-500 p-8"
+          className="relative h-96 w-80 shrink-0 overflow-hidden rounded-xl bg-black/85 p-8"
         >
           <div className="relative z-10 text-white mb-10 h-full overflow-auto thin-scrollbar">
             <motion.span
