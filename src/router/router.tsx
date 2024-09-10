@@ -10,6 +10,7 @@ import MangeUsers from "../pages/Dashboard/MangeUsers";
 import PrivetRoute from "../utils/PrivetRoute";
 import Login from "../components/Login";
 import Contact from "../pages/Contact/Contact";
+import Project from "../pages/Projects/Project";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +25,10 @@ const router = createBrowserRouter([
       {
         path: "/updateInfo",
         element: <UpdateInfo />,
+      },
+      {
+        path: "projects",
+        element: <Project/>
       },
       {
         path: "/contact",

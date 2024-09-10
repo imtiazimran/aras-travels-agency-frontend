@@ -63,7 +63,27 @@
   * {
     @apply border-border;
   }
+
   body {
     @apply bg-background text-foreground;
   }
+
+  
+}
+/* For Chrome, Safari, and Opera */
+.thin-scrollbar::-webkit-scrollbar {
+  width: 4px;
+  /* Adjust width */
+}
+
+.thin-scrollbar::-webkit-scrollbar-thumb {
+  background-color: rgba(255, 255, 255, 0.3);
+  /* Color of scrollbar */
+  border-radius: 10px;
+}
+
+/* For Firefox */
+.thin-scrollbar {
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255, 255, 255, 0.3) transparent;
 }
