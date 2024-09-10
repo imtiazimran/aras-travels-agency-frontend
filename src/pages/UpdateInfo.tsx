@@ -4,10 +4,10 @@ import { cn } from "../components/lib/cn";
 import { Label } from "../components/ui/label";
 import { Input } from "../components/ui/input";
 import { Spotlight } from "../components/ui/Spotlight";
-import { useGetMeQuery, useUpdateUserMutation } from "../redux/features/auth/authApi";
 import { FieldValues, SubmitHandler, useForm } from "react-hook-form";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { useGetMeQuery, useUpdateUserMutation } from "../redux/features/auth/authApi";
 
 export function UpdateInfo() {
   const { data } = useGetMeQuery(undefined);
@@ -25,9 +25,9 @@ export function UpdateInfo() {
       role: data?.data?.role,
     };
 
+    const response = await updateUser(updateData).unwrap();
+    console.log(response);
     try {
-      const response = await updateUser(updateData).unwrap();
-      console.log(response);
       if (response.success) {
         Swal.fire({
           icon: "success",
@@ -37,8 +37,8 @@ export function UpdateInfo() {
         }).then(() => {
           navigate("/"); // Redirect to home page on success
         });
-      } else {
-        // Show error alert if update fails
+      } else if(response.errorSources) {
+        console.log(response.errorSources[0]);
         Swal.fire({
           icon: "error",
           title: "Error",

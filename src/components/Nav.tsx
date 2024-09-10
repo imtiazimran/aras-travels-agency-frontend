@@ -12,11 +12,11 @@ import AuthBtn from "../utils/GoogleAuthBtn";
 import logo from "../assets/img/avlogo.png";
 import useScrolledValue from "../utils/useScroll";
 import Reveal from "../utils/Reveal";
-import { logout, selectUser } from "../redux/features/auth/authSlice";
 import { useAppDispatch, useAppSelector } from "../redux/hooks";
 import { Link, NavLink } from "react-router-dom";
 import { useOutsideClick } from "../hooks/useOutsideClick";
 import { persister } from "../redux/store";
+import { logout, selectUser } from "../redux/features/auth/authSlice";
 
 const Navbar = () => {
   const user = useAppSelector(selectUser);
@@ -43,8 +43,6 @@ const Navbar = () => {
     persister.purge();
   };
 
-
-
   return (
     <nav
       style={{
@@ -58,7 +56,7 @@ const Navbar = () => {
     >
       <div className="z-50">
         <Link to="/">
-        <img className="w-24" src={logo} alt="" />
+          <img className="w-24" src={logo} alt="" />
         </Link>
       </div>
       <SlideTabs />
@@ -87,13 +85,14 @@ const Navbar = () => {
       <div className="md:hidden flex  gap-4">
         <MobileNav />
         <div className="text-sm relative ">
-        {user && (  <img
-            onClick={() => setOpen((prev) => !prev)}
-            className="rounded-full size-10"
-            src={user?.picture}
-            alt={user?.name}
-          />
-)}
+          {user && (
+            <img
+              onClick={() => setOpen((prev) => !prev)}
+              className="rounded-full size-10"
+              src={user?.picture}
+              alt={user?.name}
+            />
+          )}
           <AnimatePresence>
             {open && (
               <motion.div
@@ -272,6 +271,7 @@ const MobileNav = () => {
               className="text-5xl text-center flex flex-col gap-4 skew-x-1 uppercase"
             >
               <motion.li
+              onClick={() => setActive(false)}
                 variants={childVariant}
                 whileTap={{
                   scale: 1.2,
@@ -281,9 +281,12 @@ const MobileNav = () => {
                   },
                 }}
               >
-                <Reveal>Home</Reveal>
+                <Reveal>
+                  <Link to="/"> Home </Link>
+                </Reveal>
               </motion.li>
               <motion.li
+              onClick={() => setActive(false)}
                 variants={childVariant}
                 whileTap={{
                   scale: 1.2,
@@ -293,9 +296,14 @@ const MobileNav = () => {
                   },
                 }}
               >
-                <Reveal>About</Reveal>
+                <Reveal>
+                  {user?.role === "admin" && (
+                    <Link to="/dashboard">Dashboard</Link>
+                  )}
+                </Reveal>
               </motion.li>
               <motion.li
+              onClick={() => setActive(false)}
                 variants={childVariant}
                 whileTap={{
                   scale: 1.2,
@@ -305,7 +313,9 @@ const MobileNav = () => {
                   },
                 }}
               >
-                <Reveal>Projects</Reveal>
+                <Reveal>
+                  <Link to="/contact">Contact</Link>
+                </Reveal>
               </motion.li>
               <motion.li
                 variants={childVariant}
@@ -328,6 +338,7 @@ const MobileNav = () => {
 };
 
 const SlideTabs = () => {
+  const user = useAppSelector(selectUser);
   const [position, setPosition] = useState({
     left: 0,
     width: 0,
@@ -338,10 +349,20 @@ const SlideTabs = () => {
       onMouseLeave={() => setPosition((pv) => ({ ...pv, opacity: 0 }))}
       className=" relative mx-auto hidden md:flex w-fit rounded-full border-2 border-black bg-white p-1"
     >
-      <Tab setPosition={setPosition} to="/">Home</Tab>
-      <Tab setPosition={setPosition} to="/dashboard">Dashboard</Tab>
-      <Tab setPosition={setPosition} to="/projects" >Projects</Tab>
-      <Tab setPosition={setPosition} to="/contact">Contact</Tab>
+      <Tab setPosition={setPosition} to="/">
+        Home
+      </Tab>
+      {user?.role === "admin" && (
+        <Tab setPosition={setPosition} to="/dashboard">
+          Dashboard
+        </Tab>
+      )}
+      <Tab setPosition={setPosition} to="/projects">
+        Projects
+      </Tab>
+      <Tab setPosition={setPosition} to="/contact">
+        Contact
+      </Tab>
 
       <motion.li
         animate={{
@@ -379,7 +400,14 @@ const Tab = ({
       }}
       className="relative z-10 block cursor-pointer px-3 py-1.5 text-xs uppercase text-white mix-blend-difference md:px-5 md:text-base"
     >
-      <NavLink className={({ isActive }) => (isActive ? "font-semibold text-blue-400 hover:text-white" : "")} to={to}>{children}</NavLink>
+      <NavLink
+        className={({ isActive }) =>
+          isActive ? "font-semibold text-blue-400 hover:text-white" : ""
+        }
+        to={to}
+      >
+        {children}
+      </NavLink>
     </li>
   );
 };

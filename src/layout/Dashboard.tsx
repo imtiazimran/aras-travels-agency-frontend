@@ -1,5 +1,5 @@
 import { useState } from "react";
-import {  FiSettings, FiTable, FiUser } from "react-icons/fi";
+import {  FiBookOpen, FiBriefcase, FiTable, FiUser } from "react-icons/fi";
 import { cn } from "../components/lib/cn";
 import { Sidebar, SidebarBody, SidebarLink } from "../components/ui/sidebar";
 import { Link, Outlet } from "react-router-dom";
@@ -8,7 +8,7 @@ export function Dashboard() {
   const links = [
     {
       label: "Dashboard",
-      href: "#",
+      href: "/dashboard",
       icon: (
         <FiTable className=" text-neutral-800 h-5 w-5 flex-shrink-0" />
       ),
@@ -21,10 +21,17 @@ export function Dashboard() {
       ),
     },
     {
-      label: "Settings",
-      href: "/dashboard/example",
+      label: "Create Job",
+      href: "/dashboard/createJob",
       icon: (
-        <FiSettings className=" text-neutral-800 h-5 w-5 flex-shrink-0" />
+        <FiBookOpen className=" text-neutral-800 h-5 w-5 flex-shrink-0" />
+      ),
+    },
+    {
+      label: "Manage Jobs",
+      href: "/dashboard/manageJobs",
+      icon: (
+        <FiBriefcase className=" text-neutral-800 h-5 w-5 flex-shrink-0" />
       ),
     }
   ];
@@ -32,10 +39,11 @@ export function Dashboard() {
   return (
     <div
       className={cn(
-        "rounded-md flex flex-col md:flex-row bg-neutral-800 w-full flex-1 mx-auto border border-neutral-700 overflow-hidden",
+        " flex flex-col md:flex-row b w-full bg-black/90 flex-1 mx-auto border border-neutral-700 overflow-hidden",
         "h-screen" // for your use case, use `h-screen` instead of `h-[60vh]`
       )}
     >
+      
       <Sidebar open={open} setOpen={setOpen}>
         <SidebarBody className="justify-between gap-10">
           <div className="flex flex-col flex-1 overflow-y-auto overflow-x-hidden">
@@ -74,7 +82,7 @@ export function Dashboard() {
  const Logo = () => {
   return (
     <Link
-      to="#"
+      to="/"
       className="font-normal flex space-x-2 items-center text-sm text-black py-1 relative z-20"
     >
       <div className="h-5 w-6 bg-black  rounded-br-lg rounded-tr-sm rounded-tl-lg rounded-bl-sm flex-shrink-0" />

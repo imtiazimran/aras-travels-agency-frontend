@@ -3,8 +3,13 @@ import Home from "../layout/Home";
 import App from "../App";
 import { UpdateInfo } from "../pages/UpdateInfo";
 import { Dashboard } from "../layout/Dashboard";
-import { Example } from "../pages/Dashboard/SideNav";
 import Profile from "../pages/Dashboard/Profile";
+import { CreateJob } from "../pages/Dashboard/CreateJob";
+import { JobTable } from "../pages/Dashboard/ManageJob";
+import MangeUsers from "../pages/Dashboard/MangeUsers";
+import PrivetRoute from "../utils/PrivetRoute";
+import Login from "../components/Login";
+import Contact from "../pages/Contact/Contact";
 
 const router = createBrowserRouter([
   {
@@ -20,26 +25,42 @@ const router = createBrowserRouter([
         path: "/updateInfo",
         element: <UpdateInfo />,
       },
+      {
+        path: "/contact",
+        element: <Contact/>
+      },
     ],
   },
   {
+    path: "/login",
+    element: <Login />,
+  },
+  
+  {
     path: "/dashboard",
-    element: <Dashboard />,
+    element: (
+      <PrivetRoute>
+        <Dashboard />
+      </PrivetRoute>
+    ),
     children: [
-        {
-          path: "dashboard",
-          element: <Dashboard/>
-        },
-        {
-          path: "example",
-          element: <Example/>
-        },
-        {
-            path: "profile",
-            element: <Profile/>
-        },
-
-    ]
+      {
+        index: true,
+        element: <PrivetRoute><MangeUsers /></PrivetRoute> ,
+      },
+      {
+        path: "createJob",
+        element: <CreateJob />,
+      },
+      {
+        path: "manageJobs",
+        element: <JobTable />,
+      },
+      {
+        path: "profile",
+        element: <Profile />,
+      },
+    ],
   },
 ]);
 
